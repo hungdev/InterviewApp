@@ -30,6 +30,8 @@ target 'InterviewApp' do
 
   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 
+  pod 'RNGestureHandler', :path => '../node_modules/react-native-gesture-handler'
+
   target 'InterviewAppTests' do
     inherit! :search_paths
     # Pods for testing
