@@ -32,6 +32,8 @@ target 'InterviewApp' do
 
   pod 'RNGestureHandler', :path => '../node_modules/react-native-gesture-handler'
 
+  pod 'react-native-orientation', :path => '../node_modules/react-native-orientation'
+
   target 'InterviewAppTests' do
     inherit! :search_paths
     # Pods for testing
