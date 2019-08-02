@@ -7,11 +7,12 @@ import {
   TextInput,
   TouchableOpacity
 } from 'react-native';
-import withOrientation from '../components/hoc/withOrientation';
+import WithOrientation from '../components/extends/WithOrientation';
 import styles from './styles/StartExamScreenStyles';
 import { NavigationEvents } from 'react-navigation';
+import NavigationService from '../appNavigation/NavigationService'
 
-class StartExamScreen extends React.Component {
+class StartExamScreen extends WithOrientation {
   static navigationOptions = {
     title: 'Start',
   };
@@ -21,21 +22,18 @@ class StartExamScreen extends React.Component {
   }
 
   componentDidMount() {
-    this.props.onSetLockToPortrait()
+    this.onSetLockToPortrait()
   }
 
   onStartPress() {
-    this.props.navigation.navigate('MainExam')
+    NavigationService.reset('MainExam')
   }
 
-
-
   render() {
-    this.props.isFocused && this.props.onSetLockToPortrait()
     return (
       <View style={styles.container}>
         <NavigationEvents
-          onWillFocus={() => this.props.onSetLockToPortrait()}
+          onWillFocus={() => this.onSetLockToPortrait()}
         />
         <Text style={styles.txtLabelInput}>Nhập tên thí sinh</Text>
         <TextInput
@@ -54,4 +52,4 @@ class StartExamScreen extends React.Component {
   }
 }
 
-export default withOrientation(StartExamScreen);
+export default StartExamScreen

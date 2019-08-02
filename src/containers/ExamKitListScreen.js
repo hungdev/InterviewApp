@@ -10,6 +10,7 @@ import {
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import styles from './styles/ExamKitListScreenStyles';
 import { Metrics } from '../themes';
+import NavigationService from '../appNavigation/NavigationService'
 
 const examList = [
   { id: 1, name: 'Bộ đề 1' },
@@ -30,7 +31,7 @@ class ExamKitListScreen extends React.Component {
 
   renderItem(item) {
     return (
-      <TouchableOpacity style={styles.rowContent} onPress={() => this.props.navigation.navigate('StartExam')}>
+      <TouchableOpacity style={styles.rowContent} onPress={() => NavigationService.reset('StartExam')}>
         <Text style={styles.txtContent}>{item.name}</Text>
         <Ionicons name='md-arrow-dropright' size={40} style={styles.iconArrow} />
       </TouchableOpacity>

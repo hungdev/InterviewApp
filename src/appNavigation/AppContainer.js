@@ -1,50 +1,41 @@
-import React, { Component } from 'react';
-import {
-  createStackNavigator,
-  createSwitchNavigator,
-  createAppContainer,
-  createBottomTabNavigator,
-  createDrawerNavigator
-} from 'react-navigation';
-import { Colors, Metrics, Fonts } from '../themes/';
+import React from 'react'
 
-import HomeScreen from '../containers/HomeScreen'
-import ExamKitListScreen from '../containers/ExamKitListScreen'
-import StartExamScreen from '../containers/StartExamScreen'
-import MainExamScreen from '../containers/MainExamScreen'
-import FinishExamScreen from '../containers/FinishExamScreen'
-import HistoryListScreen from '../containers/HistoryList'
-import DetailResultScreen from '../containers/DetailResultScreen'
-import HistoryScreen from '../containers/HistoryScreen'
-import DetailScreen from '../containers/DetailScreen'
+import { Button, View, Text, BackHandler, Alert } from 'react-native'
+import { createStackNavigator, createDrawerNavigator } from 'react-navigation'
 
+import NavigationService from './NavigationService'
+import TopLevelNavigator from './Router'
 
-const RootStack = createStackNavigator(
-  {
-    Home: HomeScreen,
-    ExamKitList: ExamKitListScreen,
-    StartExam: StartExamScreen,
-    MainExam: MainExamScreen,
-    FinishExam: FinishExamScreen,
-    DetailResult: DetailResultScreen,
-    Details: DetailScreen,
-    History: HistoryScreen,
-    HistoryList: HistoryListScreen,
-  },
-  {
-    initialRouteName: 'MainExam',
-    /* The header config from HomeScreen is now here */
-    defaultNavigationOptions: {
-      // headerStyle: {
-      //   // backgroundColor: Colors.white,
-      // },
-      // headerTintColor: '#fff',
-      // headerTitleStyle: {
-      //   fontWeight: 'bold',
-      // },
-    },
+export default class AppWithNavigationState extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      isLeftDrawerOpened: false,
+      isRightDrawerOpened: false
+    }
   }
-);
 
-const AppContainer = createAppContainer(RootStack);
-export default AppContainer;
+  componentDidMount() {
+    BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
+  }
+
+  componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
+  }
+
+  handleBackButton() {
+    // Alert.alert('Bạn có chắc thoát ứng dụng không?')
+    return true;
+  }
+
+  render() {
+    return (
+      <TopLevelNavigator
+        ref={navigatorRef => {
+          NavigationService.setTopLevelNavigator(navigatorRef)
+        }}
+      />
+    )
+  }
+}
+
