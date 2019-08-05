@@ -19,13 +19,13 @@ export default StyleSheet.create({
   },
   rowContent: {
     paddingVertical: Metrics.searchBarHeight,
-    borderWidth: 1,
+    // borderWidth: 1,
     borderTopColor: Colors.divider,
     paddingLeft: Metrics.baseMargin,
     // borderBottomWidth: 1,
     padding: Metrics.paddingButton,  //15
     backgroundColor: Colors.card,  // '#FFFFFF'
-    borderWidth: 1,
+    // borderWidth: 1,
     borderColor: Colors.borderGrey, // '#ccc'
     marginBottom: Metrics.smallMargin, // 5
     shadowColor: '#000000',

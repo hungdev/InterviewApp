@@ -13,7 +13,7 @@ import ExamKitListScreen from '../containers/ExamKitListScreen'
 import StartExamScreen from '../containers/StartExamScreen'
 import MainExamScreen from '../containers/MainExamScreen'
 import FinishExamScreen from '../containers/FinishExamScreen'
-import HistoryListScreen from '../containers/HistoryList'
+import DetailHistoryScreen from '../containers/DetailHistoryScreen'
 import DetailResultScreen from '../containers/DetailResultScreen'
 import HistoryScreen from '../containers/HistoryScreen'
 import DetailScreen from '../containers/DetailScreen'
@@ -29,7 +29,7 @@ const RootStack = createStackNavigator(
     DetailResult: DetailResultScreen,
     Details: DetailScreen,
     History: HistoryScreen,
-    HistoryList: HistoryListScreen,
+    DetailHistory: DetailHistoryScreen,
   },
   {
     initialRouteName: 'Home',
