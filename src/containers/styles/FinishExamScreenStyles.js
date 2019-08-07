@@ -54,5 +54,9 @@ export default StyleSheet.create({
   },
   txtBtnBottom: {
     textAlign: 'center'
+  },
+  txtLabelTextWrong: {
+    color: Colors.fire,
+    marginTop: Metrics.doubleBaseMargin
   }
 })

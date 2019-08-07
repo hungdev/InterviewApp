@@ -18,11 +18,11 @@ function navigate(routeName, params) {
 
 // with v1: NavigationActions.reset
 // with v2: StackActions.reset
-function reset(routeName) {
+function reset(routeName, params) {
   _navigator.dispatch(
     StackActions.reset({
       index: 0,
-      actions: [NavigationActions.navigate({ routeName: routeName })]
+      actions: [NavigationActions.navigate({ routeName, params })]
     })
   )
 }

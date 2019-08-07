@@ -39,5 +39,11 @@ export default StyleSheet.create({
   txtStart: {
     fontSize: Fonts.size.h4,
     textAlign: 'center'
+  },
+  txtError: {
+    color: Colors.fire,
+    marginTop: Metrics.baseMargin,
+    textAlign: 'center',
+    fontSize: Fonts.size.input
   }
 })

@@ -1,8 +1,8 @@
 
 import auth from './authAction'
-import late from './lateAction'
+import question from './questionAction'
 
 export const ActionCreators = Object.assign({
   auth,
-  late
+  question
 })

@@ -29,7 +29,7 @@ class ChooseSkodaScreen extends React.Component {
         <TouchableOpacity style={styles.rowContent} onPress={() => alert('sync')}>
           <Text style={styles.txtContent}>Đồng bộ</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.rowContent} onPress={() => alert('setting')}>
+        <TouchableOpacity style={styles.rowContent} onPress={() => this.onNavigate('Setting')}>
           <Text style={styles.txtContent}>Cài đặt</Text>
         </TouchableOpacity>
       </View>

@@ -1,10 +1,10 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, TextInput } from 'react-native';
 import Modal from "react-native-modal";
+import { connect } from 'react-redux';
 import WithOrientation from '../components/extends/WithOrientation';
 import styles from './styles/FinishExamScreenStyles';
 import { Colors, Metrics } from '../themes';
-import { StackActions, NavigationActions } from 'react-navigation';
 import NavigationService from '../appNavigation/NavigationService'
 
 class FinishExam extends WithOrientation {
@@ -25,7 +25,9 @@ class FinishExam extends WithOrientation {
   constructor(props) {
     super(props);
     this.state = {
-      isModalVisible: false
+      isModalVisible: false,
+      adminPass: '',
+      isWrongPass: false
     };
   }
 
@@ -35,20 +37,26 @@ class FinishExam extends WithOrientation {
   }
 
   btnRightHeader = () => {
-    this.setState({ isModalVisible: true })
+    this.setState({ isModalVisible: true, isWrongPass: false, adminPass: '' })
   };
 
   onPressOkModal() {
-    this.setState({ isModalVisible: false })
-    NavigationService.reset('Home')
+    const { adminPass } = this.state;
+    const { password } = this.props;
+    if (adminPass === password) {
+      this.setState({ isModalVisible: false, isWrongPass: false })
+      NavigationService.reset('Home')
+    } else this.setState({ isWrongPass: true })
   }
 
   render() {
-    const { isModalVisible } = this.state;
+    const { isModalVisible, adminPass, isWrongPass } = this.state;
+    const { navigation } = this.props;
+    const time = navigation.getParam('timeDoExam', '');
     return (
       <View style={styles.containerFinish}>
         <Text style={styles.txtFinish}>Bạn đã hoàn thành bài thi</Text>
-        <Text style={styles.txtWithTime}>với thời gian: 40p 25s</Text>
+        <Text style={styles.txtWithTime}>với thời gian: {time}</Text>
         <Modal
           isVisible={isModalVisible}
           onBackdropPress={() => this.setState({ isModalVisible: false })}
@@ -64,11 +72,15 @@ class FinishExam extends WithOrientation {
             <Text style={styles.contentTitle}>Enter admin password to go to Admin dashboard</Text>
             <TextInput
               style={styles.input}
-              onChangeText={(text) => this.setState({ text })}
-              value={this.state.text}
+              onChangeText={(text) => this.setState({ adminPass: text, isWrongPass: false })}
+              value={adminPass}
             />
+            {isWrongPass && <Text style={styles.txtLabelTextWrong}>Password is wrong!!!</Text>}
             <View style={styles.rowButton}>
-              <TouchableOpacity onPress={() => this.setState({ isModalVisible: false })} style={[styles.btnBottom, { borderRightWidth: 1 }]}>
+              <TouchableOpacity
+                style={[styles.btnBottom, { borderRightWidth: 1 }]}
+                onPress={() => this.setState({ isModalVisible: false, isWrongPass: false })}
+              >
                 <Text style={styles.txtBtnBottom}>Cancel</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.btnBottom} onPress={() => this.onPressOkModal()}>
@@ -83,5 +95,16 @@ class FinishExam extends WithOrientation {
 }
 
 
-// export default WithOrientation(FinishExam);
-export default FinishExam
+function mapStateToProps(state) {
+  return {
+    password: state.auth.password,
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    // setInfoDoExam: (data) => dispatch(setInfoDoExam(data))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(FinishExam)

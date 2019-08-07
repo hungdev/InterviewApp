@@ -2,11 +2,11 @@
 
 import { combineReducers } from 'redux'
 import auth from './authReducer'
-import late from './lateReducer'
+import question from './questionReducer'
 
 const rootReducer = combineReducers({
   auth,
-  late
+  question
 })
 
 export default rootReducer

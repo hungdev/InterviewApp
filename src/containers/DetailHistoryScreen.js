@@ -11,15 +11,22 @@ import styles from './styles/DetailHistoryScreenStyles';
 class DetailHistory extends React.Component {
 
   render() {
+    const { navigation } = this.props;
+    const user = navigation.getParam('user', '');
     return (
       <View style={styles.container}>
-        <Text style={styles.examineeName}>Thí sinh: ABC</Text>
-        <Text style={styles.rowDetail}>Làm bài lúc: 2h 35p</Text>
-        <Text style={styles.rowDetail}>Thời gian làm bài: 40p</Text>
-        <Text style={styles.rowDetail}>Tổng số câu đúng: 45 câu</Text>
-        <Text style={styles.rowDetail}>Tổng số câu sai: 5 câu</Text>
-        <Text style={styles.rowDetail}>Số câu Js đúng: 20 câu</Text>
-        <Text style={styles.rowDetail}>Số câu HTML/CSS sai: 5 câu</Text>
+        <View style={styles.userName}>
+          <Text style={styles.examineeName}>Thí sinh: {user && user.name}</Text>
+        </View>
+        <View style={styles.timeHeader}>
+          <Text style={styles.txtTime}>Time:</Text>
+          <Text style={styles.rowDetail}>Làm bài lúc: {user && user.timeStart}</Text>
+          <Text style={styles.rowDetail}>Thời gian làm bài: {user && user.timeDoExam}</Text>
+        </View>
+        <View style={[styles.timeHeader, { borderBottomWidth: 0 }]}>
+          <Text style={styles.txtTime}>Exam Details:</Text>
+          {user && user.answerDetails && user.answerDetails.map((e, i) => <Text key={i} style={styles.rowDetail}>{e}</Text>)}
+        </View>
       </View>
     );
   }

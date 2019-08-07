@@ -1,16 +1,10 @@
 import {
-  SET_TOKEN,
-  LOG_OUT
+  SET_PASSWORD
 } from './actionTypes'
 
-export const setToken = (token) => {
+export const setPassword = (pass) => {
   return {
-    type: SET_TOKEN,
-    token
-  }
-}
-export const logout = () => {
-  return {
-    type: LOG_OUT,
+    type: SET_PASSWORD,
+    pass
   }
 }

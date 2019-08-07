@@ -16,5 +16,18 @@ export default StyleSheet.create({
     marginVertical: Metrics.baseMargin,
     borderBottomWidth: 1,
     borderBottomColor: Colors.border
+  },
+  userName: {
+    borderBottomWidth: 1,
+    marginBottom: Metrics.doubleBaseMargin
+  },
+  txtTime: {
+    marginTop: Metrics.doubleBaseMargin,
+    fontSize: Fonts.size.h5,
+    fontWeight: 'bold',
+  },
+  timeHeader: {
+    borderBottomWidth: 1,
+    marginBottom: Metrics.baseMargin,
   }
 })

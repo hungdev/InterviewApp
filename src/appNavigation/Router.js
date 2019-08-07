@@ -17,6 +17,7 @@ import DetailHistoryScreen from '../containers/DetailHistoryScreen'
 import DetailResultScreen from '../containers/DetailResultScreen'
 import HistoryScreen from '../containers/HistoryScreen'
 import DetailScreen from '../containers/DetailScreen'
+import SettingScreen from '../containers/SettingScreen'
 
 
 const RootStack = createStackNavigator(
@@ -30,6 +31,7 @@ const RootStack = createStackNavigator(
     Details: DetailScreen,
     History: HistoryScreen,
     DetailHistory: DetailHistoryScreen,
+    Setting: SettingScreen,
   },
   {
     initialRouteName: 'Home',
