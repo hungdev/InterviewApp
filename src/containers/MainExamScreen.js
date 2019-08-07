@@ -15,6 +15,7 @@ import HeaderTimer from '../components/HeaderExamTimer'
 import moment from 'moment'
 import question from './data/data'
 import uuidv4 from 'uuid/v4'
+import { Colors } from '../themes';
 
 const data = Array(question.length).fill().map((e, i) => ({ id: `${i + 1}` }));
 
@@ -60,8 +61,12 @@ class MainExamScreen extends WithOrientation {
   }
 
   renderNumQuest(item) {
+    const { questionSelected } = this.state;
+    const chose = _.find(questionSelected, e => e.id.toString() === item.id.toString())
     return (
-      <TouchableOpacity style={styles.btnNumQuest} onPress={() => this.scrollToIndex(item.id)}>
+      <TouchableOpacity
+        style={[styles.btnNumQuest, { backgroundColor: chose ? Colors.borderInput : 'white' }]}
+        onPress={() => this.scrollToIndex(item.id)}>
         <Text style={styles.txtNumQuest}>{item.id}</Text>
       </TouchableOpacity>
     )
@@ -133,6 +138,7 @@ class MainExamScreen extends WithOrientation {
               keyExtractor={item => item.id}
               renderItem={({ item }) => this.renderNumQuest(item)}
               numColumns={5}
+              extraData={this.state}
             />
             <TouchableOpacity style={styles.btnSubmit} onPress={() => this.onSubmit()}>
               <Text>Nộp bài</Text>
